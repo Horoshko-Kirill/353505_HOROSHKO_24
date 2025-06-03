@@ -1,0 +1,46 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="contacts-container">
+    <h1>Наши контакты</h1>
+
+    <div class="employees-section">
+
+        {% for department, employees in departments.items %}
+        <div class="department-group">
+            <h3>{{ department }}</h3>
+
+            <div class="employees-grid">
+                {% for employee in employees %}
+                <div class="employee-card">
+                    {% if employee.photo %}
+                    <div class="employee-photo">
+                        <img src="{{ employee.photo.url }}" alt="{{ employee.user.get_full_name|default:employee.user.username }}">
+                    </div>
+                    {% endif %}
+
+                    <div class="employee-info">
+                        <h4>{{ employee.user.get_full_name|default:employee.user.username }}</h4>
+                        {% if employee.position %}
+                        <p class="position">{{ employee.position }}</p>
+                        {% endif %}
+
+                        <div class="contacts">
+                            <p><i class="fas fa-phone"></i> {{ employee.phone }}</p>
+                            <p><i class="fas fa-envelope"></i> {{ employee.email }}</p>
+                        </div>
+
+                        {% if employee.bio %}
+                        <div class="bio">
+                            {{ employee.bio|linebreaks }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

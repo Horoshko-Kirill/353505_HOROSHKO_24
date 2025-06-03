@@ -1,0 +1,72 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="careers-container">
+    <h1>Карьера в нашей компании</h1>
+    <p class="intro-text">Присоединяйтесь к нашей команде профессионалов!</p>
+
+    <div class="vacancies-section">
+        <h2>Открытые вакансии</h2>
+
+        {% if vacancies %}
+
+            <div class="vacancies-list">
+                {% for vacancy in vacancies %}
+                <div class="vacancy-card" data-position="{{ vacancy.position_type }}">
+                    <div class="vacancy-header">
+                        <h3>{{ vacancy.title }}</h3>
+                        <span class="position-type {{ vacancy.position_type }}">
+                            {{ vacancy.get_position_type_display }}
+                        </span>
+                    </div>
+
+                    <div class="vacancy-details">
+                        {% if vacancy.salary %}
+                        <div class="salary">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <strong>Зарплата:</strong> {{ vacancy.salary }}
+                        </div>
+                        {% endif %}
+
+                        <div class="published-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <strong>Опубликована:</strong> {{ vacancy.published_date|date:"d.m.Y" }}
+                        </div>
+                    </div>
+
+                    <div class="vacancy-content">
+                        <div class="description">
+                            <h4>Описание вакансии:</h4>
+                            {{ vacancy.description|linebreaks }}
+                        </div>
+
+                        <div class="requirements">
+                            <h4>Требования:</h4>
+                            {{ vacancy.requirements|linebreaks }}
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-vacancies">В данный момент нет открытых вакансий.</p>
+        {% endif %}
+    </div>
+
+    <div class="benefits-section">
+        <h2>Почему стоит работать у нас?</h2>
+            <div class="benefit-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Профессиональный рост</h3>
+                <p>Программы обучения и карьерного развития</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-heart"></i>
+                <h3>Комфортные условия</h3>
+                <p>Гибкий график, современный офис и дружный коллектив</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

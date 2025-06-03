@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход в систему</title>
+</head>
+<body>
+    <h1>Вход в систему</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label>Имя пользователя:</label>
+            <input type="text" name="username" required>
+        </div>
+        <div>
+            <label>Пароль:</label>
+            <input type="password" name="password" required>
+        </div>
+        <button type="submit">Войти</button>
+    </form>
+
+    <div>
+        <h3>Регистрация</h3>
+        <p>Выберите тип аккаунта:</p>
+        <ul>
+            <li><a href="{% url 'register_client' %}">Зарегистрироваться как клиент</a></li>
+            <li><a href="{% url 'register_employee' %}">Зарегистрироваться как сотрудник</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <p>Или <a href="{% url 'home' %}">продолжите как гость</a></p>
+    </div>
+
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+        <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %}">
+            {{ message }}
+        </p>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Мои продажи{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Мои продажи</h1>
+
+    {% if orders %}
+        <div class="list-group">
+            {% for order in orders %}
+                <div class="list-group-item mb-3">
+                    <h4>Заказ #{{ order.id }} - {{ order.status|title }}</h4>
+                    <p><strong>Дата заказа:</strong> {{ order.order_date|date:"d.m.Y" }}</p>
+                    <p><strong>Дата доставки:</strong> {{ order.delivery_date|date:"d.m.Y" }}</p>
+
+                    <h5>Клиент:</h5>
+<ul>
+    <li>Имя пользователя: {{ order.client.user.get_full_name|default:order.client.user.username }}</li>
+    <li>Email: {{ order.client.email }}</li>
+    <li>Телефон: {{ order.client.phone }}</li>
+</ul>
+
+
+                    <h5>Товары:</h5>
+                    <ul>
+                        {% for item in order.items.all %}
+                            <li>{{ item.product.name }} — {{ item.quantity }} {{ item.product.get_unit_display }} × {{ item.product.price }} ₽ = <strong>{{ item.total_price }} ₽</strong></li>
+                        {% endfor %}
+                    </ul>
+
+                    <h5>Итого: {{ order.total_cost }} ₽</h5>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <p>У вас пока нет заказов.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

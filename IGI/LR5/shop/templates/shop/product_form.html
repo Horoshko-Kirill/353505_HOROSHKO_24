@@ -1,0 +1,18 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+    <a href="{% url 'products' %}">Отмена</a>
+</form>
+
+{% if product and product.image %}
+    <p>Текущее изображение:</p>
+    <img src="{{ product.image.url }}" width="150">
+{% endif %}
+
+{% endblock %}
