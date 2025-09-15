@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Магазин{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'products' %}">Товары</a></li>
+                <li><a href="{% url 'manufacturers' %}">Производители</a></li>
+                <li><a href="{% url 'about' %}">О компании</a></li>
+                <li><a href="{% url 'news' %}">Новости</a></li>
+                <li><a href="{% url 'faq' %}">FAQ</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'privacy' %}">Политика конфиденциальности</a></li>
+                <li><a href="{% url 'careers' %}">Вакансии</a></li>
+                <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'coupons' %}">Промокоды</a></li>
+
+                {% load group_filters %}
+
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                         <a href="{% url 'product_charts' %}">Графики</a> |
+                        <a href="{% url 'admin:index' %}">Админ-панель</a> |
+                    {% elif user|in_group:"employee" %}
+                        <a href="{% url 'employee_orders' %}">Мои продажи</a> |
+                    {% elif user|in_group:"client" %}
+                        <a href="{% url 'client_orders' %}">Мои покупки</a> |
+                    {% endif %}
+                    <a href="{% url 'logout' %}">Выйти ({{ user.get_short_name }})</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Войти</a>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {% now "Y" %} Магазин. Все права защищены.</p>
+    </footer>
+</body>
+</html>

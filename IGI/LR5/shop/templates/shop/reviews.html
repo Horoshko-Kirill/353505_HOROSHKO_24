@@ -1,0 +1,41 @@
+{% extends 'shop/base.html' %}
+{% load group_filters %}
+
+{% block content %}
+<div class="reviews-container">
+    <h1>Отзывы наших клиентов</h1>
+
+    {% if user|in_group:"client" %}
+    <div class="text-right mb-4">
+        <a href="{% url 'add_review' %}" class="btn btn-primary">
+            Написать отзыв
+        </a>
+    </div>
+    {% endif %}
+
+    {% if reviews %}
+    <div class="reviews-list">
+        {% for review in reviews %}
+        <div class="review-card card mb-4">
+            <div class="card-body">
+                <div class="review-header d-flex justify-content-between">
+                    <h5 class="card-title">{{ review.author_name }}</h5>
+                    <div class="rating">
+                        {% for i in "12345" %}
+                        <i class="fas fa-star{% if forloop.counter > review.rating %} text-muted{% endif %}"></i>
+                        {% endfor %}
+                        <small class="text-muted ml-2">{{ review.created_at|date:"d.m.Y H:i" }}</small>
+                    </div>
+                </div>
+                <p class="card-text">{{ review.text }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        Пока нет отзывов. Будьте первым!
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

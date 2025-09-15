@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="faq-container">
+    <h1>Часто задаваемые вопросы</h1>
+
+    {% if featured_questions %}
+    <section class="featured-questions">
+        <h2>Популярные вопросы</h2>
+        <div class="accordion">
+            {% for item in featured_questions %}
+            <div class="accordion-item {% if forloop.first %}active{% endif %}">
+                <div class="accordion-question">{{ item.question }}</div>
+                <div class="accordion-answer">{{ item.answer|linebreaks }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+
+</div>
+{% endblock %}

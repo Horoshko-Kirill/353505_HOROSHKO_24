@@ -1,0 +1,51 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Подтверждение заказа{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Подтверждение заказа #{{ order.id }}</h1>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3>Товары в заказе:</h3>
+            <ul class="list-group mb-3">
+                {% for item in order.items.all %}
+                    <li class="list-group-item">
+                        {{ item.product.name }} - 
+                        {{ item.quantity }} {{ item.product.get_unit_display }} ×
+                        {{ item.product.price }} ₽ =
+                        <strong>{{ item.total_price }} ₽</strong>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+            <h4 class="mt-4">Итого: <strong>{{ order.total_cost }} ₽</strong></h4>
+            
+            <form method="post" class="mt-4">
+                {% csrf_token %}
+                
+                <div class="form-group mb-3">
+                    <label for="employee">Выберите сотрудника:</label>
+                    <select class="form-control" id="employee" name="employee" required>
+                        <option value="">-- Выберите сотрудника --</option>
+                        {% for employee in employees %}
+                            <option value="{{ employee.id }}">
+                                {{ employee.user.get_full_name }} ({{ employee.position }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="promo_code">Промокод (если есть):</label>
+                    <input type="text" class="form-control" name="promo_code" id="promo_code" placeholder="Введите промокод">
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg">Подтвердить заказ</button>
+                <a href="{% url 'current_order' %}" class="btn btn-outline-secondary">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

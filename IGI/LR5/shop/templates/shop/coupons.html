@@ -1,0 +1,18 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h1>Активные промокоды</h1>
+
+{% if promocodes %}
+    <ul>
+    {% for promo in promocodes %}
+        <li>
+            <strong>{{ promo.code }}</strong> - скидка {{ promo.discount_percent }}%
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>В данный момент нет активных промокодов</p>
+{% endif %}
+
+{% endblock %}

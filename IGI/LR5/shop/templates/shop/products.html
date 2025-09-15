@@ -1,0 +1,111 @@
+{% extends 'shop/base.html' %}
+{% load group_filters %}
+
+{% block title %}Каталог товаров{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Продукты</h1>
+
+    <!-- Поиск и фильтры -->
+    <form method="get" class="mb-4 p-3 bg-light rounded">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <input type="text" class="form-control" name="search" placeholder="Поиск..." value="{{ search_query }}">
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" name="category">
+                    <option value="">Все категории</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}" {% if selected_category == category.id %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" name="manufacturer">
+                    <option value="">Все производители</option>
+                    {% for manufacturer in manufacturers %}
+                    <option value="{{ manufacturer.id }}" {% if selected_manufacturer == manufacturer.id %}selected{% endif %}>
+                        {{ manufacturer.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" name="sort">
+                    <option value="name" {% if current_sort == 'name' %}selected{% endif %}>По названию</option>
+                    <option value="price_asc" {% if current_sort == 'price_asc' %}selected{% endif %}>Цена по возрастанию</option>
+                    <option value="price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>Цена по убыванию</option>
+                    <option value="newest" {% if current_sort == 'newest' %}selected{% endif %}>Сначала новые</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Применить</button>
+            </div>
+            <div class="col-md-1">
+    {% if request.user.is_authenticated and request.user|in_group:"client" %}
+    <a href="{% url 'current_order' %}" class="btn btn-success w-100">
+        Корзина <span class="badge bg-secondary">
+            {{ request.user.client.orders.last.items.count }}
+        </span>
+    </a>
+    {% endif %}
+</div>
+
+        </div>
+    </form>
+
+
+    <!-- Список продуктов -->
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">
+                        <small class="text-muted">Категория: {{ product.category.name }}</small><br>
+                        <small class="text-muted">Производитель: {{ product.manufacturer.name|default:"Не указан" }}</small>
+                    </p>
+                    <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                    <h4 class="text-primary">{{ product.price }} ₽/{{ product.get_unit_display }}</h4>
+                </div>
+                <div class="card-footer bg-transparent">
+                    {% if user|in_group:"client" %}
+                    <form method="post" action="{% url 'add_to_order' product.id %}" class="d-flex">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="1" min="1" step="1" class="form-control me-2" style="width: 80px;">
+                        <button type="submit" class="btn btn-success flex-grow-1">
+                            <i class="bi bi-cart-plus"></i> В корзину
+                        </button>
+                    </form>
+                    {% endif %}
+
+                    {% if user.is_superuser %}
+                    <div class="mt-2 d-flex justify-content-between">
+                        <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-outline-primary">Редактировать</a>
+                        <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-outline-danger">Удалить</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">Продукты не найдены</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if user.is_superuser %}
+    <div class="mt-4">
+        <a href="{% url 'add_product' %}" class="btn btn-primary">Добавить продукт</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

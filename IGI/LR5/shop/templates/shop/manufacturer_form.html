@@ -1,0 +1,22 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <button type="submit">Сохранить</button>
+    <a href="{% url 'manufacturers' %}">Отмена</a>
+</form>
+
+{% if manufacturer and manufacturer.image %}
+    <div style="margin-top: 20px;">
+        <p>Текущее изображение:</p>
+        <img src="{{ manufacturer.image.url }}" width="150">
+    </div>
+{% endif %}
+
+{% endblock %}

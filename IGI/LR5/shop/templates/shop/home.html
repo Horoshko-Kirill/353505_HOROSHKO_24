@@ -1,0 +1,32 @@
+{% extends "shop/base.html" %}
+
+
+{% block content %}
+<h2>Главная страница</h2>
+<p>Добро пожаловать в наш магазин!</p>
+<div>
+        <strong>Текущая дата (локально):</strong>
+        {{ local_time|date:"d/m/Y H:i:s" }}<br>
+
+        <strong>Текущая дата (UTC):</strong>
+        {{ utc_time|date:"d/m/Y H:i:s" }}<br>
+
+        <strong>Текущая тайм-зона:</strong>
+        {{ local_time.tzinfo }}
+    </div>
+
+    <pre>
+{{ calendar }}
+    </pre>
+
+<h2>Три шутки</h2>
+<ul>
+    {% for joke in jokes %}
+        <li>
+            <strong>{{ joke.setup }}</strong><br>
+            <em>{{ joke.punchline }}</em>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

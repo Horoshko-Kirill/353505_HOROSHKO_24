@@ -1,0 +1,26 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="add-review-container">
+    <h1>Добавить отзыв</h1>
+    
+    <form method="post" class="review-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label>Ваша оценка:</label>
+            <div class="rating-radio">
+                {{ form.rating }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.text.id_for_label }}">Текст отзыва:</label>
+            {{ form.text }}
+            {{ form.text.errors }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+    </form>
+</div>
+{% endblock %}
