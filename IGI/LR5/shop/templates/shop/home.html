@@ -1,9 +1,64 @@
 {% extends "shop/base.html" %}
-
-
+{% load static %}
 {% block content %}
-<h2>Главная страница</h2>
-<p>Добро пожаловать в наш магазин!</p>
+
+<head>
+    <meta name="description" content="Кондитерская 'Сладкий Мир' — торты и пирожные на заказ.">
+    <meta name="keywords" content="кондитерская, торты, пирожные, сладости, заказ">
+    <meta name="author" content="Сладкий Мир">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<section itemscope itemtype="https://schema.org/Store">
+  <h1 itemprop="name">Главная страница</h1>
+  <p itemprop="description">Добро пожаловать в наш магазин сладостей!</p>
+</section>
+
+{% if company %}
+<div class="company-logo">
+    <img src="{{ company.logo.url }}" alt="{{ company.title }}" style="max-width: 200px; height: auto;">
+</div>
+{% endif %}
+
+{% if banners %}
+<div>
+    <h2>Реклама</h2>
+    <div class="banners" style="display:flex; gap:20px; flex-wrap:wrap;">
+        {% for banner in banners %}
+            <a href="{{ banner.link }}" target="_blank">
+                <img src="{{ banner.image.url }}" alt="{{ banner.title }}" style="max-width:250px; height:auto;">
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<p>Баннеров нет</p>
+{% endif %}
+
+
+
+
+{% if latest_article %}
+<div class="latest-article" style="border:1px solid #ccc; padding:10px; margin-top:20px;">
+    <h2>Последняя новость: {{ latest_article.title }}</h2>
+    <p>{{ latest_article.short_description }}</p>
+    <a href="{% url 'news' %}">Читать далее</a>
+</div>
+{% endif %}
+
+{% if partners %}
+<div class="partners-section" style="margin-top:30px;">
+    <h2>Наши партнёры</h2>
+    <div class="partners-list" style="display:flex; gap:15px; flex-wrap:wrap;">
+        {% for partner in partners %}
+        <a href="{{ partner.website_url }}" target="_blank">
+            <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" style="max-width:150px; height:auto;">
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
 <div>
         <strong>Текущая дата (локально):</strong>
         {{ local_time|date:"d/m/Y H:i:s" }}<br>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Магазин{% endblock %}</title>
+      <link rel="icon" type="image/jpeg" href="media/banners/2.jfif">
 </head>
 <body>
     <header>
@@ -20,12 +21,13 @@
                 <li><a href="{% url 'careers' %}">Вакансии</a></li>
                 <li><a href="{% url 'reviews' %}">Отзывы</a></li>
                 <li><a href="{% url 'coupons' %}">Промокоды</a></li>
+                <li><a href="{% url 'show' %}">Show</a></li>
 
                 {% load group_filters %}
 
                 {% if user.is_authenticated %}
                     {% if user.is_superuser %}
-                         <a href="{% url 'product_charts' %}">Графики</a> |
+                        <a href="{% url 'product_charts' %}">Графики</a> |
                         <a href="{% url 'admin:index' %}">Админ-панель</a> |
                     {% elif user|in_group:"employee" %}
                         <a href="{% url 'employee_orders' %}">Мои продажи</a> |

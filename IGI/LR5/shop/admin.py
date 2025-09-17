@@ -18,6 +18,8 @@ admin.site.register(FAQItem)
 admin.site.register(PrivacyPolicy)
 admin.site.register(JobVacancy)
 admin.site.register(Review)
+admin.site.register(Banner)
+admin.site.register(CompanyPartner)
 
 
 

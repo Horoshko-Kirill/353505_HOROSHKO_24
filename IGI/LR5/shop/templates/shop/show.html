@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Учебная страница</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.5; }
+        img.responsive { max-width: 100%; height: auto; display: block; }
+
+
+        .horizontal-menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+            margin: 0;
+        }
+
+
+        .vertical-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        table.my-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table.my-table th,
+        table.my-table td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<section itemscope itemtype="https://schema.org/Recipe">
+  <h2 itemprop="name">Быстрые панкейки</h2>
+  <p>Время приготовления: 15 минут</p>
+
+   <ul>
+      <li>200 г муки</li>
+      <li>2 яйца</li>
+      <li>250 мл молока</li>
+      <li>2 ст.л. сахара</li>
+    </ul>
+
+  <p>Смешайте все ингредиенты и жарьте на сковороде до золотистой корочки.</p>
+</section>
+
+<header>
+    <h1>Учебная страница HTML</h1>
+</header>
+
+<section id="intro">
+    <h2>Введение</h2>
+    <p>Текст введения...</p>
+</section>
+
+<section id="data-collection">
+    <h2>1</h2>
+    <p class="info" style="color: blue;"
+       accesskey="t"
+       title="Информация о сборе данных"
+       tabindex="1"
+       dir="ltr"
+       lang="ru"
+       hidden
+       data-source="internal"
+       contenteditable="true"
+       translate="yes"
+       spellcheck="true">
+       Мы можем собирать следующие данные:
+    </p>
+</section>
+
+<section>
+    <h2>code(фрагмент кода), var(переменная, курсив), samp(результат работы программы), kbd(ввод пользователя)</h2>
+
+    <p>
+    <code>
+      var fruits = ["apples", "oranges", "mangoes", "cherries"];<br>
+      document.writeln("I like " + fruits.length + " fruits");
+    </code>
+  </p>
+  <p>The variable in this example is <var>fruits</var></p>
+  <p>The output from the code is: <samp>I like 4 fruits</samp></p>
+  <p>When prompted for my favorite fruit, I typed: <kbd>cherries</kbd>
+
+
+    <pre>
+gdg
+g dg dg
+dg
+dgdg
+    </pre>
+</section>
+
+<section>
+    <h2>1</h2>
+    <p><strong>Мы</strong> <em>в нашей</em> <mark>кондитерской</mark> <del>очень</del> <ins>ценим</ins>
+       <small>вашу</small> <cite>конфиденциальность</cite>
+       <q>и стремимся защищать</q>
+       <abbr title="Ваши личные данные">ЛД</abbr>
+       <code>Эта политика объясняет,</code> какие данные мы собираем, как их используем и как защищаем.
+    </p>
+
+    <p><dfn title="Коэффициент интеллектуального развития">IQ</dfn> — показатель умственных способностей.</p>
+    <p>Дата публикации статьи: <time datetime="2025-09-17">17 сентября 2025</time></p>
+</section>
+
+<section>
+    <h2>1</h2>
+    <p>
+    Весна пришла, природа ожила,<br>
+    Солнце светит ярко, птицы запели.<br>
+    Ручей журчит, цветы цветут в садах,<br>
+    И сердце радуется в этих днях.
+    </p>
+</section>
+
+<section>
+    <h2>1</h2>
+    <figure>
+        <picture>
+            <source srcset="/media/banners/2.jfif 1200w"
+                    sizes="(max-width: 480px) 100vw,
+                           (max-width: 1024px) 70vw,
+                           50vw"
+                    type="image/jpeg">
+            <img src="/media/banners/2.jfif"
+                 alt="Пример случайного изображения"
+                 class="responsive">
+        </picture>
+        <figcaption>Это подпись к изображению</figcaption>
+    </figure>
+</section>
+
+
+<section>
+    <h2>1</h2>
+    <a href="/media/banners/2.jfif" download="example.jpg">Скачать фото</a>
+    <p><a href="#intro">Вернуться к введению</a></p>
+</section>
+
+<nav aria-label="Горизонтальная навигация">
+    <ul class="horizontal-menu">
+        <li><a href="#intro">Главная</a></li>
+        <li><a href="#data-collection">О нас</a></li>
+        <li><a href="#table-section">Таблица</a></li>
+        <li><a href="#form-section">Форма</a></li>
+    </ul>
+</nav>
+
+<nav aria-label="Вертикальная навигация">
+    <ul class="vertical-menu">
+        <li><a href="#intro">Главная</a></li>
+        <li><a href="#data-collection">О нас</a></li>
+        <li><a href="#table-section">Таблица</a></li>
+        <li><a href="#form-section">Форма</a></li>
+    </ul>
+</nav>
+
+<section id="table-section">
+    <h2>Пример таблицы</h2>
+    <table class="my-table">
+        <thead>
+            <tr>
+                <th id="month">Месяц</th>
+                <th id="sales">Продажи</th>
+                <th id="profit">Прибыль</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td headers="month">Январь</td>
+                <td headers="sales">100</td>
+                <td headers="profit">50</td>
+            </tr>
+            <tr>
+                <td headers="month">Февраль</td>
+                <td headers="sales" colspan="2">150</td>
+            </tr>
+            <tr>
+                <td headers="month" rowspan="2">Март</td>
+                <td headers="sales">120</td>
+                <td headers="profit">60</td>
+            </tr>
+            <tr>
+                <td headers="sales">130</td>
+                <td headers="profit">70</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section id="form-section">
+    <h2>Пример формы</h2>
+    <form action="/submit" method="post" id="validatedForm">
+
+        <fieldset>
+            <legend>Личная информация</legend>
+
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" placeholder="Введите имя" required minlength="2" maxlength="50" pattern="[A-Za-zА-Яа-яЁё\s]+">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" placeholder="Пароль" required minlength="6">
+
+            <label for="age">Возраст:</label>
+            <input type="number" id="age" name="age" min="1" max="120" required>
+
+            <label for="birthdate">Дата рождения:</label>
+            <input type="date" id="birthdate" name="birthdate" min="1900-01-01" max="2025-12-31" required>
+
+            <label for="favoriteColor">Любимый цвет:</label>
+            <input type="color" id="favoriteColor" name="favoriteColor">
+        </fieldset>
+
+        <fieldset>
+            <legend>Дополнительно</legend>
+
+            <label for="photo">Загрузите фото (jpg, png, max 5MB):</label>
+            <input type="file" id="photo" name="photo" accept=".jpg,.jpeg,.png" required>
+
+            <p>Выберите ваши интересы (обязательно хотя бы один):</p>
+            <input type="checkbox" id="html" name="interests" value="HTML" required>
+            <label for="html">HTML</label>
+
+            <input type="checkbox" id="css" name="interests" value="CSS">
+            <label for="css">CSS</label>
+
+            <input type="checkbox" id="js" name="interests" value="JavaScript">
+            <label for="js">JavaScript</label>
+
+            <p>Выберите пол:</p>
+            <input type="radio" id="male" name="gender" value="Мужской" required>
+            <label for="male">Мужской</label>
+
+            <input type="radio" id="female" name="gender" value="Женский" required>
+            <label for="female">Женский</label>
+
+            <label for="country">Страна:</label>
+            <select id="country" name="country" required>
+                <option value="">Выберите страну</option>
+                <option value="ru">Россия</option>
+                <option value="us">США</option>
+                <option value="de">Германия</option>
+            </select>
+
+            <label for="message">Сообщение (10–500 символов):</label>
+            <textarea id="message" name="message" rows="4" cols="50" placeholder="Ваше сообщение" required minlength="10" maxlength="500"></textarea>
+        </fieldset>
+
+        <fieldset>
+            <button type="submit">Отправить</button>
+            <button type="reset">Сбросить</button>
+        </fieldset>
+    </form>
+</section>
+
+<section>
+    <h2>Аудио пример</h2>
+    <audio controls>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает воспроизведение аудио.
+    </audio>
+</section>
+
+<details>
+  <summary>Kinds of Triathlon</summary>
+  There are different kinds of triathlon - sprint, Olympic and so on. I am aiming for Olympic, which consists of the following:
+  <ol>
+    <li>1.5km swim</li>
+    <li>40km cycle</li>
+    <li>10km run</li>
+  </ol>
+</details>
+
+
+<b>Жирный</b>
+<em>Курсив</em>
+<i>Курсив</i>
+<s>Зачеркнутый</s>
+<strong>Жирный</strong>
+<u>Подчеркивание</u>
+<small>Шрифт на 1 меньше стандартного</small>
+<sub>Нижний регистр</sub>
+<sup>Верхний регистр</sup>
+
+</body>
+</html>

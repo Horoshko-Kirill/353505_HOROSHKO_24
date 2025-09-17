@@ -1,5 +1,10 @@
 from django.urls import path
 from django.urls import re_path
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+from LR5 import settings
 from . import views
 
 
@@ -18,6 +23,7 @@ urlpatterns = [
     path('manufacturers/', views.manufacturers, name='manufacturers'),
     path('news/', views.news, name='news'),
     path('privacy/', views.privacy, name='privacy'),
+    path('show/', views.show, name='show'),
     path('register/client/', views.register_client, name='register_client'),
     path('register/employee/', views.register_employee, name='register_employee'),
     re_path(r'^product_charts/$', views.product_charts, name='product_charts'),
@@ -36,4 +42,9 @@ urlpatterns = [
     path('current_order/', views.current_order, name='current_order'),
     path('remove_from_order/<int:item_id>/', views.remove_from_order, name='remove_from_order'),
     path('confirm_order/<int:order_id>/', views.confirm_order, name='confirm_order'),
+    path('increase_item_quantity/<int:item_id>/', views.increase_item_quantity, name='increase_item_quantity'),
+    path('decrease_item_quantity/<int:item_id>/', views.decrease_item_quantity, name='decrease_item_quantity'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

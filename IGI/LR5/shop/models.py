@@ -185,6 +185,10 @@ class AboutCompany(models.Model):
     logo = models.ImageField(_('Логотип компании'), upload_to='about/logo/', blank=True, null=True)
     created_at = models.DateTimeField(_('Дата создания'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Дата обновления'), auto_now=True)
+    video_url = models.URLField(_('Видео'), blank=True, null=True)
+    history = models.TextField(_('История'), blank=True, null=True)
+    requisites = models.TextField(_('Реквизиты'), blank=True, null=True)
+    certificate = models.TextField(_('Сертификат'), blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -280,3 +284,19 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Отзыв от {self.author_name} ({self.created_at.date()})"
+
+class Banner(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='banners/')
+    link = models.URLField()  # если баннер ведёт на сайт или акцию
+
+    def __str__(self):
+        return self.title
+
+class CompanyPartner(models.Model):
+    name = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='partners/')
+    website_url = models.URLField()
+
+    def __str__(self):
+        return self.name

@@ -10,11 +10,18 @@
     <div class="news-article">
         <h2>{{ article.title }}</h2>
 
-        {% if article.image %}
-<div class="article-image" style="max-height: 400px; max-width: 400px; overflow: hidden;">
-    <img src="{{ article.image.url }}" alt="{{ article.title }}" style="width: 100%; height: auto; max-height: 400px;">
-</div>
-{% endif %}
+        {% if article.youtube_url %}
+        <div class="video-container">
+            <iframe width="560" height="315"
+                    src="{{ article.youtube_url|youtube_embed }}"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
+        </div>
+        {% endif %}
 
 
         <p class="publication-date">Опубликовано: {{ article.publication_date|date:"d.m.Y H:i" }}</p>
@@ -28,15 +35,6 @@
         <div class="full-content">
             {{ article.full_content|linebreaks }}
         </div>
-
-        {% if article.youtube_url %}
-<div class="video-container">
-    <iframe width="560" height="315"
-            src="{{ article.youtube_url|youtube_embed }}"
-            frameborder="0"
-            allowfullscreen></iframe>
-</div>
-{% endif %}
 
     </div>
     <hr>

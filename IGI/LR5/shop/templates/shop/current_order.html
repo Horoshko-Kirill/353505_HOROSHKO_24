@@ -24,18 +24,23 @@
 
                 <h3 class="mt-4">Товары:</h3>
                 <ul class="list-group mb-3">
-                    {% for item in order.items.all %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                {{ item.product.name }} -
-                                {{ item.quantity }} {{ item.product.get_unit_display }} ×
-                                {{ item.product.price }} ₽ =
-                                <strong>{{ item.total_price }} ₽</strong>
-                            </div>
+                {% for item in order.items.all %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            {{ item.product.name }} –
+                            {{ item.quantity }} {{ item.product.get_unit_display }} ×
+                            {{ item.product.price }} ₽ =
+                            <strong>{{ item.total_price }} ₽</strong>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <a href="{% url 'decrease_item_quantity' item.id %}" class="btn btn-sm btn-outline-secondary">−</a>
+                            <a href="{% url 'increase_item_quantity' item.id %}" class="btn btn-sm btn-outline-secondary">+</a>
                             <a href="{% url 'remove_from_order' item.id %}" class="btn btn-sm btn-outline-danger">×</a>
-                        </li>
-                    {% endfor %}
-                </ul>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
 
                 <div class="d-flex justify-content-between align-items-center mt-4">
                     <h4>Итого: <strong>{{ order.total_cost }} ₽</strong></h4>

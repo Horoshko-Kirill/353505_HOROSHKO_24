@@ -22,6 +22,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import timedelta
 from .models import Product, Order, OrderItem, Client
+from .models import AboutCompany, Banner, Product, NewsArticle, CompanyPartner
 import matplotlib.pyplot as plt
 import io
 import base64
@@ -31,11 +32,13 @@ from django.contrib.auth.models import User
 
 
 def home(request):
+    # Время и календарь
     utc_time = timezone.now()
     local_time = timezone.localtime(utc_time)
     cal = calendar.TextCalendar()
     current_month_calendar = cal.formatmonth(local_time.year, local_time.month)
 
+    # Шутки
     try:
         response = requests.get('https://official-joke-api.appspot.com/random_ten')
         response.raise_for_status()
@@ -45,12 +48,34 @@ def home(request):
             {"setup": "Не удалось загрузить шутки", "punchline": "Попробуйте обновить страницу."}
         ]
 
-    return render(request, 'shop/home.html', {
+    # Логотип компании
+    company = AboutCompany.objects.first()
+
+    # Баннеры (можно несколько)
+    banners = Banner.objects.all()[:3]  # берем первые 3 баннера
+
+    # Каталог товаров/услуг
+    products = Product.objects.all()[:6]  # например первые 6 товаров
+
+    # Последняя статья
+    latest_article = NewsArticle.objects.order_by('-publication_date').first()
+
+    # Партнеры
+    partners = CompanyPartner.objects.all()
+
+    context = {
         'utc_time': utc_time,
         'local_time': local_time,
         'calendar': current_month_calendar,
         'jokes': jokes,
-    })
+        'company': company,
+        'banners': banners,
+        'products': products,
+        'latest_article': latest_article,
+        'partners': partners,
+    }
+
+    return render(request, 'shop/home.html', context)
 
 def about(request):
     # Получаем первую запись о компании (или None, если нет данных)
@@ -308,6 +333,9 @@ def news(request):
 
 def privacy(request):
     return render(request, 'shop/privacy.html')
+
+def show(request):
+    return render(request, 'shop/show.html')
 
 @login_required
 @user_passes_test(is_admin)
@@ -604,3 +632,21 @@ def confirm_order(request, order_id):
     return redirect('current_order')
 
 
+@login_required
+@user_passes_test(is_client, login_url='/accounts/login/')
+def increase_item_quantity(request, item_id):
+    item = get_object_or_404(OrderItem, id=item_id)
+    item.quantity += 1
+    item.save()
+    return redirect('current_order')
+
+@login_required
+@user_passes_test(is_client, login_url='/accounts/login/')
+def decrease_item_quantity(request, item_id):
+    item = get_object_or_404(OrderItem, id=item_id)
+    if item.quantity > 1:
+        item.quantity -= 1
+        item.save()
+    else:
+        item.delete()
+    return redirect('current_order')

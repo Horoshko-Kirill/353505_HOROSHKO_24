@@ -1,5 +1,5 @@
 {% extends 'shop/base.html' %}
-
+{% load custom_filters %}
 {% block content %}
 <div class="about-page">
     {% if company %}
@@ -20,6 +20,42 @@
             <h2>Подробнее о компании</h2>
             <p>{{ company.full_description }}</p>
         </div>
+
+
+        {% if company.video_url %}
+        <div class="company-video">
+            <h2>Видео о компании</h2>
+            <iframe width="560" height="315"
+                    src="{{ company.video_url|youtube_embed }}"
+                    title="Видео о компании"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        {% endif %}
+
+
+         {% if company.history %}
+        <div class="company-history">
+            <h2>История компании</h2>
+            <pre>{{ company.history }}</pre> <!-- <pre> сохраняет форматирование по годам -->
+        </div>
+        {% endif %}
+
+         {% if company.requisites %}
+        <div class="company-requisites">
+            <h2>Реквизиты</h2>
+            <pre>{{ company.requisites }}</pre>
+        </div>
+        {% endif %}
+
+        {% if company.certificate %}
+        <div class="company-certificate">
+            <h2>Сертификат</h2>
+            <pre>{{ company.certificate }}</pre>
+        </div>
+        {% endif %}
 
         <div class="meta-info">
             <p>Информация обновлена: {{ company.updated_at|date:"d.m.Y" }}</p>
