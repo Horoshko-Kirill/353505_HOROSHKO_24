@@ -1,13 +1,39 @@
 {% extends "shop/base.html" %}
 {% load static %}
-{% block content %}
 
+{% block title %}Главная - Сладкий Мир{% endblock %}
+
+{% block extra_head %}
 <head>
     <meta name="description" content="Кондитерская 'Сладкий Мир' — торты и пирожные на заказ.">
     <meta name="keywords" content="кондитерская, торты, пирожные, сладости, заказ">
     <meta name="author" content="Сладкий Мир">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'shop/css/components/preloader.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/components/animation.css' %}">
 </head>
+{% endblock %}
+
+{% block content %}
+
+<div class="animation-container">
+    <div class="desserts">
+        <div class="candy macaron"></div>
+        <div class="candy lollipop"></div>
+        <div class="candy cupcake"></div>
+        <div class="candy swirl-pop"></div>
+        <div class="candy jelly-bean"></div>
+        <div class="candy chocolate-bar"></div>
+    </div>
+
+    <div class="cloud">
+        <div class="smile"></div>
+    </div>
+
+    <div class="logo">
+            МИР СЛАДОСТЕЙ
+    </div>
+</div>
 
 <section itemscope itemtype="https://schema.org/Store">
   <h1 itemprop="name">Главная страница</h1>
@@ -83,5 +109,36 @@
         </li>
     {% endfor %}
 </ul>
+
+<div class="preloader">
+    <div class="infinity-loader">
+        <svg class="infinity-svg" viewBox="0 0 200 80" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#3498db">
+                        <animate attributeName="stop-color" values="#3498db;#9b59b6;#e74c3c;#3498db" dur="3s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop offset="50%" stop-color="#9b59b6">
+                        <animate attributeName="stop-color" values="#9b59b6;#e74c3c;#3498db;#9b59b6" dur="3s" repeatCount="indefinite"/>
+                    </stop>
+                    <stop offset="100%" stop-color="#e74c3c">
+                        <animate attributeName="stop-color" values="#e74c3c;#3498db;#9b59b6;#e74c3c" dur="3s" repeatCount="indefinite"/>
+                    </stop>
+                </linearGradient>
+            </defs>
+            <path class="infinity-track"
+                  d="M40,40 C40,20 80,20 100,40 C120,60 160,60 160,40
+                     C160,20 120,20 100,40 C80,60 40,60 40,40 Z"/>
+            <path class="infinity-line"
+                  d="M40,40 C40,20 80,20 100,40 C120,60 160,60 160,40
+                     C160,20 120,20 100,40 C80,60 40,60 40,40 Z"/>
+        </svg>
+    </div>
+    <p class="loading-text">Загрузка...</p>
+</div>
+
+
+
+
 
 {% endblock %}

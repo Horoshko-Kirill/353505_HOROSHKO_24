@@ -1,0 +1,61 @@
+.preloader {
+    width: 600px;   /* 300 * 2 */
+    height: 360px;  /* 180 * 2 */
+    margin: 120px auto;
+    padding: 60px;
+    background: #f8f9fa;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #e9ecef;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.infinity-loader {
+    width: 240px;
+    height: 120px;
+}
+
+.infinity-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.infinity-track {
+    fill: none;
+    stroke: #dee2e6;
+    stroke-width: 8;
+}
+
+.infinity-line {
+    fill: none;
+    stroke: url(#gradient); /* Используем градиент */
+    stroke-width: 8;
+    stroke-linecap: round;
+
+    /* 25% видно, 75% невидно */
+    stroke-dasharray: 100 300; /* скорректировано под путь */
+    stroke-dashoffset: 0;
+
+    animation: moveInfinity 2s linear infinite;
+}
+
+@keyframes moveInfinity {
+    0% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -400; } /* полная длина пути */
+}
+
+.loading-text {
+    margin-top: 40px;
+    font-size: 36px;
+    color: #495057;
+    font-weight: 600;
+    animation: textPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}

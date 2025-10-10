@@ -1,0 +1,239 @@
+/* ========================================================= */
+/* 1. ОБЩИЕ СТИЛИ И КОНТЕЙНЕР */
+/* ========================================================= */
+.animation-container {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to top, #87ceeb, #e0f2f7);
+}
+
+/* ========================================================= */
+/* 2. НАЗВАНИЕ КОМПАНИИ (ЛОГОТИП) */
+/* ========================================================= */
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: logo-fade-in 1s forwards 8s;
+    z-index: 10;
+}
+
+@keyframes logo-fade-in {
+    to {
+        opacity: 1;
+    }
+}
+
+/* ========================================================= */
+/* 3. ОБЛАКО */
+/* ========================================================= */
+.cloud {
+    position: absolute;
+    bottom: 50px;
+    left: 100%; /* старт за правым краем */
+    width: 200px;
+    height: 60px;
+    background: #ccc;
+    border-radius: 100px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    animation:
+        cloud-color-change 4s infinite alternate step-end,
+        cloud-enter-center 8s ease-in-out forwards;
+}
+
+/* облако состоит из 3 кругов */
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+}
+.cloud::before {
+    width: 100px;
+    height: 100px;
+    top: -50px;
+    left: 20px;
+}
+.cloud::after {
+    width: 80px;
+    height: 80px;
+    top: -40px;
+    right: 20px;
+}
+
+/* улыбка облака */
+.cloud .smile {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 15px;
+    border: 3px solid #333;
+    border-top: none;
+    border-radius: 0 0 30px 30px;
+    opacity: 1;
+    z-index: 6;
+}
+
+/* изменение цвета облака */
+@keyframes cloud-color-change {
+    0% { background: #ccc; }
+    33% { background: #ffeb3b; }
+    66% { background: #ff80ab; }
+    100% { background: #e0e0e0; }
+}
+
+/* плавное появление облака из-за правого края и остановка в центре */
+@keyframes cloud-enter-center {
+    0%   { left: 100%; }                 /* за правым краем */
+    70%  { left: calc(50% - 100px); }    /* центрирование (ширина = 200px) */
+    100% { left: calc(50% - 100px); }    /* остаётся по центру */
+}
+
+/* ========================================================= */
+/* 4. СЛАДОСТИ: ОБЩИЕ НАСТРОЙКИ */
+/* ========================================================= */
+.candy {
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+    animation-duration: 2.5s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Назначение траекторий */
+.macaron, .swirl-pop { animation-name: fall-curve-1; }
+.lollipop, .jelly-bean { animation-name: fall-curve-2; }
+.cupcake, .chocolate-bar { animation-name: fall-curve-3; }
+
+/* ========================================================= */
+/* 5. ТРАЕКТОРИИ ПАДЕНИЯ */
+/* ========================================================= */
+/* ПРИМЕЧАНИЕ: target-left-calc должен учитывать ширину самой сладости!
+   Цель облака: calc(50% - 100px)
+   Цель сладости: Цель облака + 100px (центр облака) - (ширина_сладости / 2)
+   Для упрощения, target-left-calc уже включает ширину сладости.
+   Мы также исправили финальную высоту top в fall-curve-3.
+*/
+@keyframes fall-curve-1 {
+    0% { top: -100px; left: var(--start-left); transform: rotate(0deg) scale(1.2); opacity: 1; }
+    30% { top: 100px; left: calc(var(--start-left) - 8%); transform: rotate(180deg) scale(1.1); }
+    60% { top: 250px; left: calc(var(--start-left) + 4%); transform: rotate(360deg) scale(1.05); }
+    99% { top: 300px; left: var(--target-left-calc); transform: rotate(540deg) scale(1); opacity: 1; }
+    100% { top: 300px; left: var(--target-left-calc); opacity: 0; }
+}
+
+@keyframes fall-curve-2 {
+    0% { top: -120px; left: var(--start-left); transform: rotate(0deg) scale(1.3); opacity: 1; }
+    30% { top: 80px; left: calc(var(--start-left) + 15%); transform: rotate(270deg) scale(1.15); }
+    60% { top: 220px; left: calc(var(--start-left) - 10%); transform: rotate(450deg) scale(1.08); }
+    99% { top: 300px; left: var(--target-left-calc); transform: rotate(720deg) scale(1); opacity: 1; }
+    100% { top: 300px; left: var(--target-left-calc); opacity: 0; }
+}
+
+@keyframes fall-curve-3 {
+    0% { top: -80px; left: var(--start-left); transform: rotate(0deg) scale(1.1); opacity: 1; }
+    40% { top: 150px; left: calc(var(--start-left) + 5%); transform: rotate(90deg) scale(1.05); }
+    80% { top: 270px; left: calc(var(--start-left) - 15%); transform: rotate(180deg) scale(1.02); }
+    /* ИСПРАВЛЕНИЕ TOP: Чуть выше, чем 300px, чтобы лучше "лечь" в облако */
+    99% { top: 290px; left: var(--target-left-calc); transform: rotate(360deg) scale(1); opacity: 1; }
+    100% { top: 290px; left: var(--target-left-calc); opacity: 0; }
+}
+
+/* ========================================================= */
+/* 6. СЛАДОСТИ: КОНКРЕТНЫЕ ЭЛЕМЕНТЫ (ИСПРАВЛЕНИЕ ЦЕЛЕВЫХ КООРДИНАТ) */
+/* ========================================================= */
+
+/* Облако Центр = 50% контейнера.
+   Облако Левый край = calc(50% - 100px).
+   Целевая точка сладости: calc(50% - 100px) + 100px - (ширина_сладости / 2)
+   Цель = calc(50% - (ширина_сладости / 2))
+*/
+
+/* 1. Макарон (ширина 40px, половина 20px) */
+.macaron {
+    --start-left: 5%;
+    --target-left-calc: calc(50% - 20px);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: #ffb6c1;
+    top: -50px;
+    animation-delay: 0s;
+}
+.macaron::before { content: ''; position: absolute; width: 100%; height: 10px; background: #fff; top: 50%; transform: translateY(-50%); border-radius: 5px; box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); }
+
+/* 2. Леденец (ширина 30px, половина 15px) */
+.lollipop {
+    --start-left: 20%;
+    --target-left-calc: calc(50% - 15px);
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: repeating-linear-gradient(45deg, #ff4081, #ff4081 5px, #fff 5px, #fff 10px);
+    top: -80px;
+    animation-delay: 1s;
+}
+.lollipop::before { content: ''; position: absolute; width: 3px; height: 30px; background: #fff; bottom: -30px; left: 50%; transform: translateX(-50%); border-radius: 0 0 3px 3px; }
+
+/* 3. Кекс (Cupcake) (ширина 50px, половина 25px) */
+.cupcake {
+    --start-left: 45%;
+    --target-left-calc: calc(50% - 25px); /* ИСПРАВЛЕНИЕ ЦЕЛИ */
+    width: 50px; height: 30px;
+    background: #ffecb3;
+    border-radius: 5px 5px 25px 25px;
+    top: -70px;
+    animation-delay: 2s;
+}
+.cupcake::before { content: ''; position: absolute; width: 50px; height: 25px; background: #81d4fa; top: -15px; border-radius: 50% 50% 0 0; }
+.cupcake::after { content: ''; position: absolute; width: 8px; height: 8px; background: #d32f2f; top: -20px; left: 21px; border-radius: 50%; }
+
+/* 4. Спиральный леденец (ширина 45px, половина 22.5px) */
+.swirl-pop {
+    --start-left: 60%;
+    --target-left-calc: calc(50% - 22.5px);
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    background: conic-gradient(#f44336 0% 25%, #4caf50 25% 50%, #2196f3 50% 75%, #ffeb3b 75% 100%);
+    top: -90px;
+    animation-delay: 3s;
+}
+
+/* 5. Желейная конфета (ширина 20px, половина 10px) */
+.jelly-bean {
+    --start-left: 75%;
+    --target-left-calc: calc(50% - 10px);
+    width: 20px; height: 35px;
+    border-radius: 50% / 60% 60% 40% 40%;
+    background: #ff9800;
+    top: -60px;
+    animation-delay: 4s;
+}
+
+/* 6. Шоколадный батончик (ширина 50px, половина 25px) */
+.chocolate-bar {
+    --start-left: 90%;
+    --target-left-calc: calc(50% - 25px);
+    width: 50px; height: 25px;
+    border-radius: 3px;
+    background: #795548;
+    top: -100px;
+    animation-delay: 5s;
+}
+.chocolate-bar::before,
+.chocolate-bar::after { content: ''; position: absolute; width: 2px; height: 100%; background: rgba(0, 0, 0, 0.1); }
+.chocolate-bar::before { left: 16px; }
+.chocolate-bar::after { left: 32px; }
