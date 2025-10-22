@@ -1,39 +1,11 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Учебная страница</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.5; }
-        img.responsive { max-width: 100%; height: auto; display: block; }
-
-
-        .horizontal-menu {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            padding: 0;
-            margin: 0;
-        }
-
-
-        .vertical-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        table.my-table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        table.my-table th,
-        table.my-table td {
-            border: 1px solid black;
-            padding: 5px;
-            text-align: left;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'shop/css/components/selector.css' %}">
 </head>
 <body>
 

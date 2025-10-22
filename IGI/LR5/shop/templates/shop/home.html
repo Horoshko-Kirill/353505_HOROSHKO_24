@@ -4,14 +4,14 @@
 {% block title %}Главная - Сладкий Мир{% endblock %}
 
 {% block extra_head %}
-<head>
     <meta name="description" content="Кондитерская 'Сладкий Мир' — торты и пирожные на заказ.">
     <meta name="keywords" content="кондитерская, торты, пирожные, сладости, заказ">
     <meta name="author" content="Сладкий Мир">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'shop/css/components/home.css' %}">
     <link rel="stylesheet" href="{% static 'shop/css/components/preloader.css' %}">
     <link rel="stylesheet" href="{% static 'shop/css/components/animation.css' %}">
-</head>
 {% endblock %}
 
 {% block content %}
@@ -47,12 +47,13 @@
 {% endif %}
 
 {% if banners %}
-<div>
+<div class="banners-section">
     <h2>Реклама</h2>
-    <div class="banners" style="display:flex; gap:20px; flex-wrap:wrap;">
+    <div class="banners-list">
         {% for banner in banners %}
             <a href="{{ banner.link }}" target="_blank">
-                <img src="{{ banner.image.url }}" alt="{{ banner.title }}" style="max-width:250px; height:auto;">
+                {# Удалены инлайновые стили, чтобы использовать CSS из home.css #}
+                <img src="{{ banner.image.url }}" alt="{{ banner.title }}">
             </a>
         {% endfor %}
     </div>
@@ -62,23 +63,30 @@
 {% endif %}
 
 
-
-
 {% if latest_article %}
-<div class="latest-article" style="border:1px solid #ccc; padding:10px; margin-top:20px;">
-    <h2>Последняя новость: {{ latest_article.title }}</h2>
-    <p>{{ latest_article.short_description }}</p>
-    <a href="{% url 'news' %}">Читать далее</a>
+{# ПРИМЕНЕНИЕ CSS-КЛАССА для позиционирования #}
+<div class="latest-article-fixed">
+    <div class="article-info">
+        <h2>Последняя новость:</h2>
+        <h3>{{ latest_article.title }}</h3>
+        <p>{{ latest_article.short_description }}</p>
+        <a href="{% url 'news' %}">Читать далее</a>
+    </div>
 </div>
 {% endif %}
 
 {% if partners %}
 <div class="partners-section" style="margin-top:30px;">
     <h2>Наши партнёры</h2>
-    <div class="partners-list" style="display:flex; gap:15px; flex-wrap:wrap;">
+    {# Удалены инлайновые стили для flex, используется partners-list #}
+    <div class="partners-list">
         {% for partner in partners %}
-        <a href="{{ partner.website_url }}" target="_blank">
-            <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" style="max-width:150px; height:auto;">
+        {# ДОБАВЛЕНЫ КЛАССЫ для стилизации: partner-block (для блока) #}
+        <a href="{{ partner.website_url }}" target="_blank" class="partner-block">
+            {# ДОБАВЛЕН КЛАСС для круглой формы: partner-logo, инлайн-стили удалены #}
+            <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo">
+            {# Добавляем контейнер для стилизации текста/кернинга #}
+            <div class="partner-name">{{ partner.name }}</div>
         </a>
         {% endfor %}
     </div>
@@ -136,9 +144,6 @@
     </div>
     <p class="loading-text">Загрузка...</p>
 </div>
-
-
-
 
 
 {% endblock %}

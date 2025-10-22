@@ -1,0 +1,155 @@
+/* shop/css/components/reviews.css */
+
+/* ====== ОБЩИЕ СТИЛИ СТРАНИЦЫ И СПИСКА ОТЗЫВОВ ====== */
+.reviews-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Verdana', sans-serif;
+    color: #333;
+}
+
+.reviews-container h1 {
+    text-align: center;
+    color: #ff69b4; /* Теплый розовый, подходящий для кондитерской */
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    border-bottom: 2px solid #ff69b4;
+    padding-bottom: 10px;
+}
+
+/* Карточка отзыва */
+.review-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: #fffaf0; /* Кремовый фон */
+    transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-3px);
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.review-header {
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-weight: bold;
+    color: #4b0082; /* Фиолетовый акцент для имени */
+    font-size: 1.2em;
+}
+
+.rating i {
+    color: gold;
+}
+
+.rating .text-muted {
+    color: #ccc !important;
+}
+
+.card-text {
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+
+/* ====== СТИЛИ КОМПОНЕНТОВ ФОРМЫ (ГЛАВНОЕ ТРЕБОВАНИЕ) ====== */
+
+/* 1. ПОЛЯ ВВОДА ТЕКСТА (например, имя, заголовок) */
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+    /* Ключевое слово для шрифта: monospace (моноширинный) */
+    font-family: monospace;
+    font-size: 1em;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ПСЕВДОКЛАСС: Фокус (когда пользователь вводит данные) */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus {
+    border-color: #ffc0cb; /* Светло-розовый акцент */
+    box-shadow: 0 0 0 3px rgba(255, 192, 203, 0.5);
+    outline: none; /* Убираем стандартную обводку браузера */
+}
+
+/* ПСЕВДОКЛАСС: Невалидный ввод (если требуется) */
+input:invalid {
+    border-color: #dc3545; /* Красный для ошибки */
+}
+
+/* 2. ПОЛЕ ТЕКСТОВОЙ ОБЛАСТИ (textarea - для основного текста отзыва) */
+textarea {
+    /* Ключевое слово для шрифта: serif (с засечками) */
+    font-family: serif;
+    font-size: 1.1em;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    resize: vertical; /* Разрешаем изменение размера только по вертикали */
+    line-height: 1.5;
+    transition: border-color 0.3s ease;
+}
+
+/* ПСЕВДОКЛАСС: Фокус */
+textarea:focus {
+    border-color: #ff69b4; /* Розовый акцент */
+    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.3);
+    outline: none;
+}
+
+/* 3. КНОПКА ОТПРАВКИ */
+.btn-primary,
+button[type="submit"] {
+    /* Ключевое слово для шрифта: sans-serif (рубленый) */
+    font-family: sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 12px 25px;
+    background-color: #ff69b4;
+    border: 1px solid #ff69b4;
+    border-radius: 25px; /* Скругленная кнопка */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+/* ПСЕВДОКЛАСС: Наведение */
+.btn-primary:hover,
+button[type="submit"]:hover {
+    background-color: #ff1493; /* Более темный розовый */
+    border-color: #ff1493;
+}
+
+/* ПСЕВДОКЛАСС: Активное нажатие */
+.btn-primary:active,
+button[type="submit"]:active {
+    transform: translateY(1px); /* Небольшое смещение при нажатии */
+}
+
+/* ПСЕВДОКЛАСС: Отключенная кнопка (если форма не заполнена) */
+.btn-primary:disabled,
+button[type="submit"]:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* ПСЕВДОКЛАСС: placeholder */
+input::placeholder,
+textarea::placeholder {
+    font-style: italic;
+    color: #aaa;
+    /* Ключевое слово для placeholder: fantasy */
+    font-family: fantasy;
+}

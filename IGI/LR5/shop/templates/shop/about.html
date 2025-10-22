@@ -1,14 +1,22 @@
 {% extends 'shop/base.html' %}
 {% load custom_filters %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'shop/css/components/about.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="about-page">
     {% if company %}
         <h1>{{ company.title }}</h1>
 
         {% if company.logo %}
-    <img src="{{ company.logo.url }}"
-         alt="Логотип {{ company.title }}"
-         style="max-width: 200px; height: auto;">
+    <div class="logo-container">
+        <img src="{{ company.logo.url }}"
+             alt="Логотип {{ company.title }}"
+             class="logo-transformed">
+    </div>
 {% endif %}
 
         <div class="short-description">
@@ -23,7 +31,7 @@
 
 
         {% if company.video_url %}
-        <div class="company-video">
+        <div class="video-container">
             <h2>Видео о компании</h2>
             <iframe width="560" height="315"
                     src="{{ company.video_url|youtube_embed }}"
@@ -39,21 +47,28 @@
          {% if company.history %}
         <div class="company-history">
             <h2>История компании</h2>
-            <pre>{{ company.history }}</pre> <!-- <pre> сохраняет форматирование по годам -->
+            <div class="history-list">
+                {{ company.history|linebreaksbr }}
+            </div>
         </div>
         {% endif %}
 
          {% if company.requisites %}
         <div class="company-requisites">
             <h2>Реквизиты</h2>
-            <pre>{{ company.requisites }}</pre>
+            <div class="requisites-text">
+                {{ company.requisites|linebreaksbr }}
+            </div>
         </div>
         {% endif %}
 
         {% if company.certificate %}
         <div class="company-certificate">
             <h2>Сертификат</h2>
-            <pre>{{ company.certificate }}</pre>
+            <div class="certificate-block">
+                {# Если company.certificate содержит текст, он будет внутри блока #}
+                <p>{{ company.certificate }}</p>
+            </div>
         </div>
         {% endif %}
 

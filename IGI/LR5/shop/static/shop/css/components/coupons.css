@@ -1,0 +1,99 @@
+/* ================================
+   shop/css/components/coupons.css
+   ================================ */
+
+/* Обёртка для страницы */
+.coupons-page {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+    color: #333;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* Заголовок страницы */
+.coupons-page h1 {
+    text-align: center;
+    color: #007bff;
+    font-size: 2.2em;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.coupons-page h1::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #007bff;
+    border-radius: 3px;
+}
+
+/* Список промокодов */
+.coupons-page ul {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+/* Карточка промокода */
+.coupons-page ul li {
+    background: #ffffff;
+    border: 1px solid #dbe3f0;
+    border-left: 6px solid #007bff;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.coupons-page ul li:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+    border-left-color: #0056b3;
+}
+
+/* Код промо */
+.coupons-page ul li strong {
+    color: #222;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+}
+
+/* Значок 🎁 */
+.coupons-page ul li::after {
+    content: "🎁";
+    font-size: 1.4em;
+    margin-left: 10px;
+}
+
+/* Сообщение при отсутствии промокодов */
+.coupons-page p {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    font-size: 1.05em;
+    margin-top: 20px;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .coupons-page ul li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .coupons-page ul li strong {
+        margin-bottom: 5px;
+    }
+}

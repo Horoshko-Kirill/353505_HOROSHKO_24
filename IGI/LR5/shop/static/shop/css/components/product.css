@@ -1,0 +1,182 @@
+/* shop/css/components/product.css */
+
+/*
+* Общие стили для контейнера с карточками товаров
+* Использует CSS Grid для создания адаптивной сетки
+*/
+.product-grid {
+    /* 1. Включаем Grid Layout */
+    display: grid;
+    /* 2. Задаем автоматические колонки:
+       - repeat(auto-fit, ...): автоматически создает колонки
+       - minmax(300px, 1fr): минимальная ширина карточки 300px, максимальная занимает 1 часть доступного пространства
+    */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* 3. Отступы между карточками */
+    gap: 20px;
+    padding-bottom: 30px; /* Дополнительный отступ снизу */
+}
+
+/*
+* Стили для отдельной карточки товара
+*/
+.product-card {
+    /* Контейнер карточки */
+    display: flex; /* Используем Flexbox внутри карточки для организации содержимого */
+    flex-direction: column; /* Элементы внутри карточки располагаются вертикально */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden; /* Обрезает содержимое, особенно для img с border-radius */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%; /* Гарантирует, что все карточки в ряду будут одинаковой высоты */
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+    /* Изображение товара */
+    width: 100%;
+    height: 200px; /* Фиксированная высота для единообразия */
+    object-fit: cover; /* Обрезает изображение, чтобы оно заполняло контейнер */
+    border-bottom: 1px solid #eee;
+}
+
+.product-card .info {
+    /* Блок с текстовой информацией */
+    padding: 15px;
+    flex-grow: 1; /* Позволяет блоку занимать все оставшееся вертикальное пространство */
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card h3 {
+    /* Название товара */
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.product-card .desc {
+    /* Краткое описание */
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.product-card .meta {
+    /* Мета-информация (Категория, Производитель) */
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.product-card .price {
+    /* Цена */
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #007bff; /* Акцентный цвет для цены */
+    margin-top: auto; /* Прижимает цену к низу блока .info */
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+}
+
+.product-card .actions {
+    /* Блок с действиями (Корзина, Администраторские кнопки) */
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Стили для формы добавления в корзину */
+.product-card form {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.product-card input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.product-card .btn-add {
+    /* Кнопка "В корзину" */
+    background-color: #28a745; /* Зеленый цвет */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.product-card .btn-add:hover {
+    background-color: #218838;
+}
+
+/* Стили для администраторских кнопок */
+.product-card .admin-actions {
+    display: flex;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.product-card .admin-actions a {
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+}
+
+.product-card .admin-actions .edit {
+    color: #007bff;
+}
+
+.product-card .admin-actions .delete {
+    color: #dc3545;
+}
+
+.product-card .admin-actions a:hover {
+    opacity: 0.7;
+}
+
+/* Стили для сообщения "Продукты не найдены" */
+.alert {
+    grid-column: 1 / -1; /* Занимает всю ширину сетки */
+    padding: 15px;
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Стили для кнопки "Добавить продукт" */
+.mt-4 .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.mt-4 .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}

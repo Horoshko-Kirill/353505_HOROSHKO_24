@@ -1,0 +1,147 @@
+/* shop/css/components/home.css */
+
+/*
+* 1. ФИКСИРОВАННАЯ НАВИГАЦИЯ (Требование: Область навигации должна фиксироваться)
+* Фиксируем ВЕСЬ <header>, чтобы nav и другие элементы шапки фиксировались вместе.
+*/
+header {
+    /* Фиксируем шапку относительно окна просмотра */
+    position: fixed;
+    /* Растягиваем на всю ширину */
+    width: 100%;
+    /* Прижимаем к верху */
+    top: 0;
+    /* Устанавливаем z-index, чтобы header был поверх другого контента */
+    z-index: 1000;
+    /* Устанавливаем фон, чтобы контент под шапкой не просвечивал */
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Добавление отступа к main, чтобы контент не перекрывался фиксированной шапкой/навигацией */
+main {
+    /* **Ключевое исправление:** Компенсация высоты шапки.
+       Предполагаем, что высота вашей шапки 70px. */
+    padding-top: 70px;
+}
+
+/*
+* 2. ПАРТНЕРЫ (Стили без изменений, так как они специфичны и не влияют на base.html)
+*/
+.partners-section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.partners-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+
+.partner-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s;
+}
+
+.partner-block:hover {
+    transform: translateY(-5px);
+}
+
+.partner-logo {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 5px solid #ffccdd;
+    box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+    margin-bottom: 10px;
+}
+
+.partner-name {
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding: 5px 0;
+}
+
+/*
+* 3. ПОЗИЦИОНИРОВАНИЕ ДЛЯ ПОСЛЕДНЕЙ СТАТЬИ
+* Изменено на 'sticky' для лучшей интеграции в поток документа.
+* Требует, чтобы родительский элемент (например, <body> или <div> вокруг main) имел высоту.
+*/
+.latest-article-fixed {
+    /* Используем фиксированное позиционирование относительно окна просмотра */
+    position: fixed;
+
+    /* Отступы от верхнего и правого края окна (ниже фиксированной навигации) */
+    top: 100px;
+    right: 20px;
+
+    width: 250px;
+    z-index: 900;
+
+    /* Стилизация (без изменений) */
+    background-color: #fff9e6;
+    border: 1px solid #ffaa00;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Медиа-запрос: Обязательно скрываем блок на узких экранах, чтобы не мешал контенту */
+@media (max-width: 900px) {
+    .latest-article-fixed {
+        display: none;
+    }
+}
+
+.article-info h2 {
+    font-size: 1.1rem;
+    color: #cc6600;
+    margin-bottom: 5px;
+}
+
+.article-info h3 {
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.article-info p {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* Медиа-запрос: скрываем блок новости на маленьких экранах, чтобы не мешал */
+@media (max-width: 900px) {
+    .latest-article-fixed {
+        /* **Ключевое исправление:** Скрываем блок на мобильных, чтобы не мешал */
+        display: none;
+    }
+}
+
+/* Дополнительные стили для баннеров */
+.banners-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.banners-list img {
+    max-width: 250px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

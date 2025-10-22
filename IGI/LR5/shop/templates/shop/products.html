@@ -1,7 +1,12 @@
 {% extends 'shop/base.html' %}
+{% load static %}
 {% load group_filters %}
 
 {% block title %}Каталог товаров{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'shop/css/components/product.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -58,49 +63,43 @@
     </form>
 
 
-    <!-- Список продуктов -->
-    <div class="row">
+        <div class="product-grid">
         {% for product in products %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                {% if product.image %}
-                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+        <div class="product-card">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% endif %}
+            <div class="info">
+                <h3>{{ product.name }}</h3>
+                <p class="desc">{{ product.description|truncatechars:100 }}</p>
+                <p class="meta">
+                    Категория: <strong>{{ product.category.name }}</strong><br>
+                    Производитель: <strong>{{ product.manufacturer.name|default:"Не указан" }}</strong>
+                </p>
+                <p class="price">{{ product.price }} ₽ / {{ product.get_unit_display }}</p>
+            </div>
+            <div class="actions">
+                {% if user|in_group:"client" %}
+                <form method="post" action="{% url 'add_to_order' product.id %}">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="1" min="1" step="1">
+                    <button type="submit" class="btn-add">В корзину</button>
+                </form>
                 {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">
-                        <small class="text-muted">Категория: {{ product.category.name }}</small><br>
-                        <small class="text-muted">Производитель: {{ product.manufacturer.name|default:"Не указан" }}</small>
-                    </p>
-                    <p class="card-text">{{ product.description|truncatechars:100 }}</p>
-                    <h4 class="text-primary">{{ product.price }} ₽/{{ product.get_unit_display }}</h4>
-                </div>
-                <div class="card-footer bg-transparent">
-                    {% if user|in_group:"client" %}
-                    <form method="post" action="{% url 'add_to_order' product.id %}" class="d-flex">
-                        {% csrf_token %}
-                        <input type="number" name="quantity" value="1" min="1" step="1" class="form-control me-2" style="width: 80px;">
-                        <button type="submit" class="btn btn-success flex-grow-1">
-                            <i class="bi bi-cart-plus"></i> В корзину
-                        </button>
-                    </form>
-                    {% endif %}
 
-                    {% if user.is_superuser %}
-                    <div class="mt-2 d-flex justify-content-between">
-                        <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-outline-primary">Редактировать</a>
-                        <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-outline-danger">Удалить</a>
-                    </div>
-                    {% endif %}
+                {% if user.is_superuser %}
+                <div class="admin-actions">
+                    <a href="{% url 'edit_product' product.id %}" class="edit">✎</a>
+                    <a href="{% url 'delete_product' product.id %}" class="delete">✖</a>
                 </div>
+                {% endif %}
             </div>
         </div>
         {% empty %}
-        <div class="col-12">
-            <div class="alert alert-info">Продукты не найдены</div>
-        </div>
+        <div class="alert">Продукты не найдены</div>
         {% endfor %}
     </div>
+
 
     {% if user.is_superuser %}
     <div class="mt-4">

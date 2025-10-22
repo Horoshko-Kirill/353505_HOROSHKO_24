@@ -1,3 +1,5 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,6 +8,7 @@
     <title>{% block title %}Магазин{% endblock %}</title>
       <link rel="icon" type="image/jpeg" href="media/banners/2.jfif">
      {% block extra_head %}{% endblock %}
+        <link rel="stylesheet" href="{% static 'shop/css/components/base.css' %}">
 </head>
 <body>
     <header>
@@ -24,21 +27,23 @@
                 <li><a href="{% url 'coupons' %}">Промокоды</a></li>
                 <li><a href="{% url 'show' %}">Show</a></li>
 
+                <li>
                 {% load group_filters %}
 
                 {% if user.is_authenticated %}
                     {% if user.is_superuser %}
-                        <a href="{% url 'product_charts' %}">Графики</a> |
-                        <a href="{% url 'admin:index' %}">Админ-панель</a> |
+                        <a href="{% url 'product_charts' %}">Графики</a>
+                        <a href="{% url 'admin:index' %}">Админ-панель</a>
                     {% elif user|in_group:"employee" %}
-                        <a href="{% url 'employee_orders' %}">Мои продажи</a> |
+                        <a href="{% url 'employee_orders' %}">Мои продажи</a>
                     {% elif user|in_group:"client" %}
-                        <a href="{% url 'client_orders' %}">Мои покупки</a> |
+                        <a href="{% url 'client_orders' %}">Мои покупки</a>
                     {% endif %}
-                    <a href="{% url 'logout' %}">Выйти ({{ user.get_short_name }})</a>
+                    <a href="{% url 'logout' %}">Выйти</a>
                 {% else %}
                     <a href="{% url 'login' %}">Войти</a>
                 {% endif %}
+                </li>
             </ul>
         </nav>
     </header>

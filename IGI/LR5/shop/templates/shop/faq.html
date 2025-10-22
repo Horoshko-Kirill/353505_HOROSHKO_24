@@ -1,23 +1,35 @@
 {% extends 'shop/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'shop/css/components/faq.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="faq-container">
-    <h1>Часто задаваемые вопросы</h1>
+    <h1>Словарь терминов и часто задаваемых вопросов</h1>
 
     {% if featured_questions %}
     <section class="featured-questions">
-        <h2>Популярные вопросы</h2>
-        <div class="accordion">
+        <h2>Популярные вопросы и определения</h2>
+        <div class="accordion-pure-css">
             {% for item in featured_questions %}
-            <div class="accordion-item {% if forloop.first %}active{% endif %}">
-                <div class="accordion-question">{{ item.question }}</div>
-                <div class="accordion-answer">{{ item.answer|linebreaks }}</div>
+            <div class="accordion-item">
+
+                <input type="checkbox" id="q-{{ forloop.counter }}" class="accordion-toggle" hidden>
+
+                <label for="q-{{ forloop.counter }}" class="accordion-header">
+                    <span class="accordion-question">{{ item.question }}</span>
+                    <span class="question-date">Добавлено: {{ item.date_added|date:"d.m.Y" }}</span>
+                </label>
+
+                <div class="accordion-answer">
+                    <p>{{ item.answer|linebreaks }}</p>
+                </div>
             </div>
             {% endfor %}
         </div>
     </section>
     {% endif %}
-
-
 </div>
 {% endblock %}

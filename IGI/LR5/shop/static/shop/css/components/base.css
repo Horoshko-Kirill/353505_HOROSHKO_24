@@ -1,0 +1,166 @@
+/* === ОБЩИЕ НАСТРОЙКИ === */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #fffaf7 0%, #ffe6da 100%);
+    color: #4a2c2a;
+    line-height: 1.8;
+    word-spacing: 0.1em;
+    letter-spacing: 0.03em;
+    background-attachment: fixed;
+}
+
+/* === ШАПКА === */
+header {
+    background: linear-gradient(90deg, #f8b195, #f67280);
+    padding: 20px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header ul li {
+    display: inline-block;
+    margin: 0 18px;
+}
+
+header ul li a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+header ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #fff;
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s ease;
+}
+
+header ul li a:hover::after {
+    width: 100%;
+}
+
+/* === ОСНОВНОЙ КОНТЕНТ === */
+main {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 40px 60px;
+    background: #fffaf7;
+    border-radius: 20px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+    text-align: justify;
+    text-indent: 2em;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* === ЗАГОЛОВКИ === */
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-variant: small-caps;
+    text-transform: capitalize;
+    color: #c45c4b;
+    margin-top: 1.2em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    text-align: center;
+}
+
+/* === ПАРАГРАФЫ === */
+p {
+    margin-bottom: 1.2em;
+    line-height: 1.9;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+/* === ЦИТАТЫ / ВЫДЕЛЕНИЯ === */
+blockquote {
+    background-color: #fff1ea;
+    border-left: 6px solid #f8a78b;
+    padding: 15px 20px;
+    margin: 30px 0;
+    border-radius: 8px;
+    font-style: italic;
+    color: #663a33;
+}
+
+/* === КНОПКИ === */
+button, .btn {
+    background: linear-gradient(90deg, #f8b195, #f67280);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+button:hover, .btn:hover {
+    background: linear-gradient(90deg, #f67280, #c06c84);
+    transform: translateY(-2px);
+}
+
+/* === ПОДВАЛ === */
+footer {
+    text-align: center;
+    background: linear-gradient(90deg, #c06c84, #6c5b7b);
+    color: #fff;
+    padding: 20px 0;
+    font-size: 0.9em;
+    margin-top: 60px;
+    letter-spacing: 0.05em;
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.1);
+}
+
+/* === ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ === */
+.text-highlight {
+    background: #ffe9e3;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+/* === ВЫРАВНИВАНИЕ === */
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
+
+/* === АНИМАЦИЯ ПРИ ПРОКРУТКЕ === */
+.fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+.fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

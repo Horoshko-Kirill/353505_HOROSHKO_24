@@ -1,0 +1,206 @@
+/* =========================
+   🍰 СТИЛЬ СТРАНИЦЫ "О КОМПАНИИ"
+   ========================= */
+
+/* ====== ОБЩИЕ НАСТРОЙКИ ====== */
+.about-page {
+    font-family: "Playfair Display", "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #fff9f5 0%, #ffe6e1 100%);
+    padding: 3rem;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+/* Фоновый узор — конфетки, печенье и т.п. */
+.about-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("../img/sweets-bg.png");
+    background-repeat: repeat;
+    background-size: 250px;
+    opacity: 0.08;
+    z-index: -1;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #a8432e;
+    text-shadow: 1px 1px 2px #fff;
+    text-transform: uppercase;
+}
+
+p {
+    color: #4b2e2b;
+    line-height: 1.7;
+    font-size: 1.05em;
+    text-indent: 1.5em;
+    letter-spacing: 0.3px;
+    word-spacing: 1px;
+}
+
+/* ====== ЛОГОТИП ====== */
+.logo-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo-transformed {
+    width: 200px;
+    transition: transform 0.8s ease, filter 0.6s ease;
+    transform: rotateY(0deg);
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+}
+
+/* Анимация при наведении */
+.logo-transformed:hover {
+    transform: rotateY(360deg) scale(1.1);
+    filter: drop-shadow(0 8px 16px rgba(255, 160, 122, 0.7));
+}
+
+/* ====== ОПИСАНИЯ ====== */
+.short-description, .full-description {
+    margin: 2rem auto;
+    max-width: 900px;
+    background: #ffffffb0;
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* ====== ИСТОРИЯ КОМПАНИИ ====== */
+.company-history {
+    margin: 2.5rem auto;
+    max-width: 900px;
+}
+
+.company-history h2 {
+    margin-bottom: 1rem;
+}
+
+.history-list {
+    background: #fffaf7;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border-left: 6px solid #f8b195;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.history-list p {
+    margin: 0.6rem 0;
+}
+
+.history-list::before {
+    content: "📜";
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* ====== РЕКВИЗИТЫ ====== */
+.company-requisites {
+    background: #fff0eb;
+    padding: 2rem;
+    border-radius: 20px;
+    margin: 2rem auto;
+    max-width: 800px;
+    border: 2px dashed #f8b195;
+    text-align: center;
+}
+
+.company-requisites .requisites-text {
+    font-weight: 600;
+    color: #8b3a2b;
+    font-family: "Courier New", monospace;
+    font-variant: small-caps;
+}
+
+/* ====== ВИДЕО ====== */
+.video-container {
+    text-align: center;
+    margin: 2rem auto;
+}
+
+.video-container iframe {
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: transform 0.4s ease;
+}
+
+.video-container iframe:hover {
+    transform: scale(1.03);
+}
+
+/* ====== СЕРТИФИКАТ (с ЦЕЛОЙ РАМКОЙ) ====== */
+.company-certificate {
+    text-align: center;
+    margin: 3rem auto;
+    position: relative;
+    z-index: 1;
+}
+
+.certificate-block {
+    display: inline-block;
+    position: relative;
+    width: 700px;              /* подстрой под размер рамки */
+    height: 500px;
+    background-image: url("../img/certificate-border.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    font-family: "Georgia", serif;
+    color: #3b2a28;
+    text-align: center;
+    overflow: hidden;
+    z-index: 2;
+    background-blend-mode: multiply;
+    background-color: rgba(255, 248, 240, 0.9);
+}
+
+/* Вендорные префиксы */
+.certificate-block {
+    -webkit-box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* Внутренний текст сертификата */
+.certificate-block p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.3em;
+    line-height: 1.6;
+    width: 80%;
+    text-shadow: 1px 1px 3px rgba(255,255,255,0.6);
+    background: linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0));
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.certificate-block:hover {
+    transform: scale(1.02);
+    transition: transform 0.4s ease;
+}
+
+/* ====== МЕТА ИНФОРМАЦИЯ ====== */
+.meta-info {
+    margin-top: 3rem;
+    text-align: right;
+    font-size: 0.9em;
+    color: #8c6f66;
+    font-style: italic;
+}
+
+/* ====== ЕСЛИ НЕТ ИНФОРМАЦИИ ====== */
+.no-info {
+    text-align: center;
+    padding: 4rem;
+    color: #8b3a2b;
+    background: #fffaf7;
+    border-radius: 15px;
+}

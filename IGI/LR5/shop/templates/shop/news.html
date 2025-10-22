@@ -1,15 +1,22 @@
-{% extends 'shop/base.html' %}  <!-- Если у вас есть базовый шаблон -->
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'shop/css/components/news.css' %}">
+{% endblock %}
 
 {% block content %}
-{% load custom_filters %}  <!-- Load the custom filters at the top of your template -->
-
 <div class="news-container">
     <h1>Новости</h1>
 
     {% for article in articles %}
     <div class="news-article">
+        <!-- Заголовок статьи -->
         <h2>{{ article.title }}</h2>
 
+        <!-- Картинка, если есть -->
+        <!-- Видео, если есть -->
         {% if article.youtube_url %}
         <div class="video-container">
             <iframe width="560" height="315"
@@ -23,19 +30,27 @@
         </div>
         {% endif %}
 
-
+        <!-- Дата публикации и категория -->
         <p class="publication-date">Опубликовано: {{ article.publication_date|date:"d.m.Y H:i" }}</p>
-
         {% if article.category %}
-        <p class="category">Категория: {{ article.category }}</p>
+            <p class="category">Категория: {{ article.category }}</p>
         {% endif %}
 
+        <!-- Краткое описание с многоточием -->
         <p class="short-description">{{ article.short_description }}</p>
 
+        <!-- Полный контент скрыт по умолчанию -->
         <div class="full-content">
             {{ article.full_content|linebreaks }}
         </div>
 
+        <!-- Кнопка «Читать далее» -->
+        <a href="#" class="read-more" onclick="
+            this.previousElementSibling.style.display='block';
+            this.style.display='none';
+            return false;">
+            Читать далее
+        </a>
     </div>
     <hr>
     {% empty %}

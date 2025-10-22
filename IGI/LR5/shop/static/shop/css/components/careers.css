@@ -1,0 +1,186 @@
+/* ====== ОСНОВНОЕ ОФОРМЛЕНИЕ ====== */
+.careers-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: "Segoe UI", sans-serif;
+    color: #4a2c2a;
+    background-color: #fffaf6;
+}
+
+.careers-container h1 {
+    text-align: center;
+    color: #b85c38;
+    font-size: 2.8em;
+    margin-bottom: 10px;
+}
+
+.intro-text {
+    text-align: center;
+    font-size: 1.2em;
+    color: #704a44;
+    margin-bottom: 40px;
+}
+
+/* ====== СЕКЦИЯ ВАКАНСИЙ ====== */
+.vacancies-section h2 {
+    font-size: 2em;
+    color: #b85c38;
+    border-bottom: 2px solid #e4b89b;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+/* ====== СПИСОК ВАКАНСИЙ (используем плавающие блоки) ====== */
+.vacancies-list {
+    width: 100%;
+    overflow: hidden; /* чтобы контейнер учитывал высоту float-элементов */
+}
+
+.vacancy-card {
+    float: left; /* создаем плавающий блок */
+    width: 45%;
+    margin: 2.5%;
+    background: #fff;
+    border: 2px solid #f2d0b6;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vacancy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Очищаем обтекание каждые 2 элемента */
+.vacancy-card:nth-child(2n) {
+    margin-right: 0;
+}
+
+.vacancy-card:nth-child(2n+1) {
+    clear: left;
+}
+
+/* ====== ШАПКА ВАКАНСИИ ====== */
+.vacancy-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.vacancy-header h3 {
+    font-size: 1.5em;
+    color: #b85c38;
+    margin: 0;
+}
+
+.position-type {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    color: white;
+}
+
+.position-type.full_time {
+    background-color: #4caf50;
+}
+
+.position-type.part_time {
+    background-color: #ff9800;
+}
+
+.position-type.remote {
+    background-color: #3f51b5;
+}
+
+/* ====== ДЕТАЛИ ====== */
+.vacancy-details {
+    margin: 10px 0;
+    font-size: 0.95em;
+}
+
+.salary, .published-date {
+    margin-bottom: 5px;
+}
+
+.salary i, .published-date i {
+    color: #b85c38;
+    margin-right: 8px;
+}
+
+/* ====== СОДЕРЖАНИЕ ====== */
+.vacancy-content {
+    margin-top: 10px;
+}
+
+.vacancy-content h4 {
+    color: #a04a2c;
+    margin-bottom: 5px;
+}
+
+.description, .requirements {
+    background-color: #fff8f2;
+    border-left: 4px solid #f0b27a;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+}
+
+/* ====== ЕСЛИ НЕТ ВАКАНСИЙ ====== */
+.no-vacancies {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+    margin-top: 40px;
+}
+
+/* ====== ПРЕИМУЩЕСТВА ====== */
+.benefits-section {
+    clear: both; /* сбрасываем обтекание после списка вакансий */
+    margin-top: 50px;
+    text-align: center;
+}
+
+.benefits-section h2 {
+    color: #b85c38;
+    margin-bottom: 30px;
+}
+
+.benefit-card {
+    display: inline-block;
+    width: 280px;
+    background: #fff7f3;
+    border: 1px solid #f5c6a5;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    vertical-align: top;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+    background: #fff0e5;
+    transform: scale(1.03);
+}
+
+.benefit-card i {
+    font-size: 2em;
+    color: #d47745;
+    margin-bottom: 10px;
+}
+
+.benefit-card h3 {
+    margin: 0;
+    color: #a04a2c;
+}
+
+/* ====== АДАПТИВНОСТЬ ====== */
+@media (max-width: 900px) {
+    .vacancy-card {
+        width: 100%;
+        float: none;
+        margin: 15px 0;
+    }
+}

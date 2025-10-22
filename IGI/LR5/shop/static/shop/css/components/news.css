@@ -1,0 +1,90 @@
+/* Контейнер всех новостей */
+.news-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Заголовок страницы */
+.news-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #2E7D32;
+}
+
+/* Каждая новость */
+.news-article {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Заголовок новости */
+.news-article h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #1976D2;
+}
+
+/* Дата публикации и категория */
+.news-article .publication-date,
+.news-article .category {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Краткое описание с многоточием */
+.news-article .short-description {
+    display: -webkit-box;           /* создаём flex-подобный контейнер для webkit */
+    -webkit-box-orient: vertical;   /* вертикальная ориентация линий */
+    -webkit-line-clamp: 3;          /* максимум 3 строки */
+    overflow: hidden;               /* скрываем лишнее */
+    text-overflow: ellipsis;        /* добавляем многоточие */
+    line-height: 1.5em;             /* чтобы подсчёт строк был правильным */
+    max-height: 4.5em;              /* line-height * lines = 1.5 * 3 = 4.5 */
+}
+
+
+/* Полный контент скрыт по умолчанию */
+.news-article .full-content {
+    display: none;
+    margin-top: 15px;
+    column-count: 2;           /* многоколоночный макет */
+    column-gap: 30px;
+}
+
+/* Кнопка "Читать далее" */
+.news-article .read-more {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.news-article .read-more:hover {
+    background-color: #388E3C;
+}
+
+/* Видео */
+.news-article .video-container {
+    margin: 15px 0;
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.news-article .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

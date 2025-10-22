@@ -1,6 +1,10 @@
 {% extends 'shop/base.html' %}
 {% load group_filters %}
+{% load static %}
 
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'shop/css/components/reviews.css' %}">
+{% endblock %}
 {% block content %}
 <div class="reviews-container">
     <h1>Отзывы наших клиентов</h1>
