@@ -1,0 +1,52 @@
+.order-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  margin-top: 20px;
+}
+
+.order-table th {
+  background-color: #fff0e6;
+  color: var(--accent-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  padding: 15px;
+  text-align: left;
+}
+
+.order-table td {
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #555;
+}
+
+.order-table tr:last-child td {
+  border-bottom: none;
+}
+
+.order-table tr:hover td {
+  background-color: #fffcf8;
+}
+
+input, select {
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 2px solid #eee;
+  background: #fdfdfd;
+  font-family: inherit;
+  transition: all 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(255, 140, 105, 0.15);
+}

@@ -1,0 +1,60 @@
+header {
+  padding: 15px 30px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 20px rgba(139, 69, 19, 0.05);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+header a {
+  text-decoration: none;
+  color: var(--accent-color);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  transition: all 0.3s;
+}
+
+header a:hover {
+  color: var(--primary-color);
+  background-color: rgba(255, 122, 89, 0.1);
+}
+
+header button {
+  background: var(--primary-gradient);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 30px;
+  color: white;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: var(--button-glow);
+  transition: all var(--transition-speed);
+}
+
+header button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--button-glow-hover);
+}
+
+header button:active {
+    transform: scale(0.95);
+}
